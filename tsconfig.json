@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "lib": [
+      "es5",
+      "es2015",
+      "dom",
+      "scripthost",
+      "es2016.array.include",
+      "es2017.object"
+    ],
+    "outDir": "dist/out-tsc",
+    "jsx": "react",
+    "allowJs": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noStrictGenericChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveConstEnums": true,
+    "rootDir": "src",
+    "strictNullChecks": true,
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ]
+  },
+  "include": [
+    "src/**/*.tsx", "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "compileOnSave": true
+}

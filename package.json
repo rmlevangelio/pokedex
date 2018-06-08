@@ -1,0 +1,51 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "dev": "NODE_ENV=development webpack-dev-server --mode development"
+  },
+  "author": "Remiel Evangelio",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.109",
+    "@types/react": "^16.3.16",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.2",
+    "@types/redux-actions": "^2.3.0",
+    "autoprefixer": "^8.6.0",
+    "awesome-typescript-loader": "^5.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
+    "redux-devtools-extension": "^2.13.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "tslint-config-airbnb": "^5.9.2",
+    "typescript": "^2.9.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.3",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0"
+  }
+}
