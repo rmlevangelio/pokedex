@@ -54,12 +54,19 @@ class Pokedex extends React.PureComponent<Props, State> {
         { isFetchingResults ? 'Fetching pokemons...' : null }
         { count === 0 ? null :
           <div>
-            <button type="button" onClick={this.toggleList} className="btn btn-warning btn-sm cardInfo__button">View List</button>
+            { list.length === 0 ? null :
+              <button type="button" onClick={this.toggleList} className="btn btn-warning btn-sm cardInfo__button">My Pokemon</button>
+            }
             { this.state.toggleList ? 
               <div className="list">
                 { list.length === 0 ? null :
                   <ol>
-                    { list.map((item: any) => <li className="listItem">{ item.name }</li>)}
+                    { list.map((item: any) => 
+                      <li className="listItem">
+                        { item.name }
+                        {' '}
+                        <button type="button" className="btn btn-primary btn-sm cardInfo__button">View details</button>
+                      </li>)}
                   </ol>
                 }
               </div> : null
