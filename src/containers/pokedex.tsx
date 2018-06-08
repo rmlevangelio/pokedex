@@ -13,6 +13,7 @@ interface State {
 interface ReduxState {
   isFetchingResults: boolean;
   info: object[];
+  list: object[];
   results: Result[];
   count: number;
   next: string | null;
@@ -46,7 +47,7 @@ class Pokedex extends React.PureComponent<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { isFetchingResults, results, count, info } = this.props;
+    const { isFetchingResults, results, count, info, list } = this.props;
 
     return (
       <div className="pokedex">
@@ -56,7 +57,11 @@ class Pokedex extends React.PureComponent<Props, State> {
             <button type="button" onClick={this.toggleList} className="btn btn-warning btn-sm cardInfo__button">View List</button>
             { this.state.toggleList ? 
               <div className="list">
-                asdas
+                { list.length === 0 ? null :
+                  <ol>
+                    { list.map((item: any) => <li className="listItem">{ item.name }</li>)}
+                  </ol>
+                }
               </div> : null
             }
             
@@ -82,6 +87,7 @@ const mapStateToProps = (state: AppState) : ReduxState => {
     pokedexApp: {
       isFetchingResults,
       info,
+      list,
       output: { 
         results, count, next, previous
       }
@@ -90,6 +96,7 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   return {
     isFetchingResults,
     info,
+    list,
     results,
     count,
     next,
