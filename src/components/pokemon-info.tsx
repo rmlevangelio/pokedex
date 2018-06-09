@@ -2,9 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from '../reducers'
-import { createRequest, updateList } from '../actions/pokedex-actions';
+import { createRequest, updateList, updateSelectedPokemon } from '../actions/pokedex-actions';
 
 import { concat } from 'lodash';
+import { Pokemon } from '../models/pokedex-models';
 
 interface ReduxState {
   list: any;
@@ -16,13 +17,18 @@ interface Props extends ReduxState {
   id: number;
   createRequest(payload: any): any;
   updateList(payload: any): any;
+  updateSelectedPokemon(payload: any): any;
 }
 
 class PokemonInfo extends React.PureComponent<Props> {
-
   handleViewDetailsButton = () => {
-    const payload = { url: this.props.url };
-    this.props.createRequest(payload);
+    fetch(this.props.url)
+      .then(res => res.json())
+      .then(data => {
+        const pokemon = new Pokemon(data);
+        this.props.updateSelectedPokemon(pokemon);
+      })
+      .catch(error => console.log(error));
   }
 
   handleToggleToList = () => {
@@ -43,7 +49,7 @@ class PokemonInfo extends React.PureComponent<Props> {
 
   public render(): JSX.Element {
     const { name, list } = this.props;
-    const imgUrl = `https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/${this.props.id}.png`;
+    const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.props.id}.png`;
     return (
       <div key={ name } className="card cardInfo text-center">
         <div className="card-header cardInfo__header">
@@ -81,4 +87,6 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   }
 }
 
-export default connect(mapStateToProps, { createRequest, updateList })(PokemonInfo);
+const mapDispatchToProps = { createRequest, updateList, updateSelectedPokemon };
+
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonInfo);

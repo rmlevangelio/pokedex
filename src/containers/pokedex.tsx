@@ -5,6 +5,7 @@ import { AppState } from '../reducers';
 import { Result } from '../models/pokedex-models';
 import { createRequest } from '../actions/pokedex-actions';
 import PokemonInfo from '../components/pokemon-info';
+import PokemonDetails from '../components/pokemon-details';
 
 interface State {
   toggleList: boolean;
@@ -13,6 +14,7 @@ interface State {
 interface ReduxState {
   isFetchingResults: boolean;
   list: object[];
+  selectedPokemon: any,
   results: Result[];
   count: number;
   next: string | null;
@@ -24,7 +26,9 @@ interface Props extends ReduxState {
 }
 
 class Pokedex extends React.PureComponent<Props, State> {
-  state = { toggleList: false } 
+  state = {
+    toggleList: false
+  } 
 
   public componentDidMount() {
     const payload = { url: 'https://pokeapi.co/api/v2/pokemon/' };
@@ -36,7 +40,8 @@ class Pokedex extends React.PureComponent<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { isFetchingResults, results, count, list } = this.props;
+    const { isFetchingResults, results, count, list, selectedPokemon } = this.props;
+  
     return (
       <div className="pokedex">
         { isFetchingResults ? 'Fetching pokemons...' : null }
@@ -59,7 +64,11 @@ class Pokedex extends React.PureComponent<Props, State> {
                 }
               </div> : null
             }
-            
+
+            { selectedPokemon === '' ? null :
+              <PokemonDetails pokemon={selectedPokemon} />
+            }
+
             { results.map((result, index) => (
               <PokemonInfo
                 key={ index }
@@ -81,6 +90,7 @@ const mapStateToProps = (state: AppState) : ReduxState => {
     pokedexApp: {
       isFetchingResults,
       list,
+      selectedPokemon,
       output: { 
         results, count, next, previous
       }
@@ -89,6 +99,7 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   return {
     isFetchingResults,
     list,
+    selectedPokemon,
     results,
     count,
     next,

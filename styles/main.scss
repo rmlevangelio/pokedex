@@ -16,8 +16,15 @@
   color: #fff;
 }
 
-.cardInfo__title {
+.cardInfo__title,
+.pokemonDetails__name {
   text-transform: capitalize;
+}
+
+.pokemonDetails {
+  padding: 10px;
+  text-align: center;
+  background: #ddd;
 }
 
 .listItem {

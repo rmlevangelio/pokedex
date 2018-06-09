@@ -16,7 +16,8 @@ export interface RawPokemon {
   name: string;
   weight: number;
   height: number;
-  moves: object[];
+  sprites: any;
+  types: any;
 }
 
 export class Pokemon {
@@ -24,15 +25,17 @@ export class Pokemon {
   public name: string;
   public weight: number;
   public height: number;
-  public moves: object[];
+  public image: string;
+  public type: string;
   
   constructor(rawPokemon: RawPokemon) {
-    const { id, name, weight, height, moves } = rawPokemon;
+    const { id, name, weight, height, sprites, types  } = rawPokemon;
 
     this.id = id;
     this.name = name;
     this.weight = weight;
     this.height = height;
-    this.moves = moves;
+    this.image = sprites.front_default;
+    this.type = types[0].type.name;
   }
 }

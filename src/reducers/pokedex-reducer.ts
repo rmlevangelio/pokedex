@@ -7,6 +7,7 @@ export interface State {
   isFetchingResults: boolean;
   pageLoaded: 'list' | 'info';
   info: object;
+  selectedPokemon: any;
   list: object[];
   output: FetchResultState;
 }
@@ -15,6 +16,7 @@ export const initialState: State = {
   isFetchingResults: false,
   pageLoaded: 'list',
   info: {},
+  selectedPokemon: '',
   list: [],
   output: {
     results: [],
@@ -43,6 +45,10 @@ export function reducer(state: State = initialState, action: Action<any>) {
       const newState = Object.assign({}, state);
       newState.info[action.payload.id] = action.payload;
       return { ...newState };
+    }
+
+    case ActionTypes.UPDATE_SELECTED_POKEMON: {
+      return { ...state, selectedPokemon: action.payload }
     }
 
     case ActionTypes.UPDATE_LIST: {

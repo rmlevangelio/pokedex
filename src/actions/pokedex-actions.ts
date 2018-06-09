@@ -34,6 +34,14 @@ export function onSuccessRequest(payload: any) {
   };
 }
 
+export type updateSelectedPokemonAction = Action<any>;
+export function updateSelectedPokemon(payload: any) {
+  return {
+    type: ActionTypes.UPDATE_SELECTED_POKEMON,
+    payload
+  };
+}
+
 export type updateListAction = Action<any>;
 export function updateList(payload: any) {
   return {
