@@ -10,12 +10,8 @@ const fetchPokemonFromApi = (url: string) =>
 function* fetchResults(action: any) {
   try {
     const results = yield call(fetchPokemonFromApi, action.payload.url);
-    
-    // do all function here depending on their result shape
-    // Pokemon info fetched
-    if (results.id !== undefined) {
-      yield put({ type: ActionTypes.FETCH_INFO_SUCCESS, payload: results });
-    } else {
+
+    if (results.count !== undefined) {
       yield put({ type: ActionTypes.FETCH_RESULTS_SUCCESS, payload: results});
     }
 

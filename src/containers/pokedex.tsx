@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { AppState } from '../reducers';
 import { Result } from '../models/pokedex-models';
 import { createRequest } from '../actions/pokedex-actions';
-import PokemonInfo from '../components/pokemon-info';
+import PokemonList from '../components/pokemon-list';
 import PokemonDetails from '../components/pokemon-details';
+import MyList from '../components/pokedex-mylist';
 
 interface State {
   toggleList: boolean;
@@ -50,19 +51,8 @@ class Pokedex extends React.PureComponent<Props, State> {
             { list.length === 0 ? null :
               <button type="button" onClick={this.toggleList} className="btn btn-warning btn-sm cardInfo__button">My Pokemon</button>
             }
-            { this.state.toggleList ? 
-              <div className="list">
-                { list.length === 0 ? null :
-                  <ol>
-                    { list.map((item: any) => 
-                      <li className="listItem">
-                        { item.name }
-                        {' '}
-                        <button type="button" className="btn btn-primary btn-sm cardInfo__button">View details</button>
-                      </li>)}
-                  </ol>
-                }
-              </div> : null
+            { !this.state.toggleList ? null :
+              <MyList list={list} />
             }
 
             { selectedPokemon === '' ? null :
@@ -70,7 +60,7 @@ class Pokedex extends React.PureComponent<Props, State> {
             }
 
             { results.map((result, index) => (
-              <PokemonInfo
+              <PokemonList
                 key={ index }
                 id={index + 1}
                 url={result.url}

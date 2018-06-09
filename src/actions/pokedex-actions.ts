@@ -10,14 +10,6 @@ export function createRequest(payload: any) {
   };
 }
 
-export type onFetchPokemonInfoAction = Action<any>;
-export function onFetchPokemonInfo(payload: any) {
-  return {
-    type: ActionTypes.FETCH_INFO_SUCCESS,
-    payload
-  };
-}
-
 export type onFetchResultsAction = Action<any>;
 export function onFetchResults(payload: any) {
   return {

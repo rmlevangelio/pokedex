@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from '../reducers'
-import { createRequest, updateList, updateSelectedPokemon } from '../actions/pokedex-actions';
+import { updateList, updateSelectedPokemon } from '../actions/pokedex-actions';
 
 import { concat } from 'lodash';
 import { Pokemon } from '../models/pokedex-models';
@@ -15,12 +15,11 @@ interface Props extends ReduxState {
   url: string;
   name: string;
   id: number;
-  createRequest(payload: any): any;
   updateList(payload: any): any;
   updateSelectedPokemon(payload: any): any;
 }
 
-class PokemonInfo extends React.PureComponent<Props> {
+class PokemonList extends React.PureComponent<Props> {
   handleViewDetailsButton = () => {
     fetch(this.props.url)
       .then(res => res.json())
@@ -87,6 +86,6 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   }
 }
 
-const mapDispatchToProps = { createRequest, updateList, updateSelectedPokemon };
+const mapDispatchToProps = { updateList, updateSelectedPokemon };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);

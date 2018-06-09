@@ -41,12 +41,6 @@ export function reducer(state: State = initialState, action: Action<any>) {
       return { ...state, output: { results, count, next, previous }}
     }
 
-    case ActionTypes.FETCH_INFO_SUCCESS: {
-      const newState = Object.assign({}, state);
-      newState.info[action.payload.id] = action.payload;
-      return { ...newState };
-    }
-
     case ActionTypes.UPDATE_SELECTED_POKEMON: {
       return { ...state, selectedPokemon: action.payload }
     }
