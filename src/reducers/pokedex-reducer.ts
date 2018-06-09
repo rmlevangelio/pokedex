@@ -5,14 +5,16 @@ import { FetchResultState } from '../models/pokedex-models';
 
 export interface State {
   isFetchingResults: boolean;
-  info: object[];
+  pageLoaded: 'list' | 'info';
+  info: object;
   list: object[];
   output: FetchResultState;
 }
 
 export const initialState: State = {
   isFetchingResults: false,
-  info: [],
+  pageLoaded: 'list',
+  info: {},
   list: [],
   output: {
     results: [],
@@ -40,7 +42,7 @@ export function reducer(state: State = initialState, action: Action<any>) {
     case ActionTypes.FETCH_INFO_SUCCESS: {
       const newState = Object.assign({}, state);
       newState.info[action.payload.id] = action.payload;
-      return Object.assign(state, newState);
+      return { ...newState };
     }
 
     case ActionTypes.UPDATE_LIST: {

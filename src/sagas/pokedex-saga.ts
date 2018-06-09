@@ -1,4 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
+
 import * as ActionTypes from '../actions/action-types';
 
 const fetchPokemonFromApi = (url: string) =>

@@ -12,7 +12,6 @@ interface State {
 
 interface ReduxState {
   isFetchingResults: boolean;
-  info: object[];
   list: object[];
   results: Result[];
   count: number;
@@ -25,21 +24,11 @@ interface Props extends ReduxState {
 }
 
 class Pokedex extends React.PureComponent<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-
-    this.state = { toggleList: false }
-  }
+  state = { toggleList: false } 
 
   public componentDidMount() {
     const payload = { url: 'https://pokeapi.co/api/v2/pokemon/' };
     this.props.createRequest(payload); // initial fetch
-  }
-
-  public componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.info.length !== 0) {
-      console.log('remiel');
-    } 
   }
 
   toggleList = () => {
@@ -47,8 +36,7 @@ class Pokedex extends React.PureComponent<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { isFetchingResults, results, count, info, list } = this.props;
-
+    const { isFetchingResults, results, count, list } = this.props;
     return (
       <div className="pokedex">
         { isFetchingResults ? 'Fetching pokemons...' : null }
@@ -78,7 +66,6 @@ class Pokedex extends React.PureComponent<Props, State> {
                 id={index + 1}
                 url={result.url}
                 name={result.name}
-                info={info}
               />
             ))
             }
@@ -93,7 +80,6 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   const {
     pokedexApp: {
       isFetchingResults,
-      info,
       list,
       output: { 
         results, count, next, previous
@@ -102,7 +88,6 @@ const mapStateToProps = (state: AppState) : ReduxState => {
   } = state;
   return {
     isFetchingResults,
-    info,
     list,
     results,
     count,
